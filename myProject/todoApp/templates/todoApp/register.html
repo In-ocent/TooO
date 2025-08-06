@@ -73,6 +73,10 @@
     color: white;
     text-decoration: none;
     font-weight: bold;
+    transition: all 2s ease;
+   }
+   a:hover{
+    color: rgb(43, 142, 125);
    }
 
    form{
@@ -147,14 +151,20 @@
     <div class="container">
         <div class="dispisher">
             <div class="black"></div>
-            <form method="/">
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
                 <h1 class="signatur">Register</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color: rgb(17, 145, 17)">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
                 <div class="input-container">
-                    <input type="text" name="name" id="name" placeholder="Create a username" required >
+                    <input type="text" name="username" id="name" placeholder="Create a username" required >
                     <input type="email" name="email" placeholder="Enter your email" id="email" >
                     <input type="password" name="password" placeholder="Enter a password" id="password">
-                    <button type="submit" class="btn">Submit</button>
-                    <p>Don't have an account?<a href="./login.html">Login</a></p>
+                    <button type="submit" class="btn">Register</button>
+                    <p>Don't have an account?<a href="{% url 'login' %}">Login</a></p>
                 </div>
             </form>
            

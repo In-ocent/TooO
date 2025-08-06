@@ -140,6 +140,9 @@
     z-index: -1;
 }
 }
+.ppgreen{
+    color: green;
+}
 
     
 </style>
@@ -147,14 +150,19 @@
     <div class="container">
         <div class="dispisher">
             <div class="black"></div>
-            <form method="/">
+            <form method="POST">
+                {% csrf_token %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="ppgreen">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
                 <h1 class="signatur">Login</h1>
                 <div class="input-container">
                     <input type="text" name="username" id="name" placeholder="Create a username" required >
-                    <input type="email" name="email" placeholder="Enter your email" id="email" >
-                    <input type="password" name="passwd" placeholder="Enter a password" id="password">
+                    <input type="password" name="password" placeholder="Enter a password" id="password">
                     <button type="submit" class="btn">Submit</button>
-                     <p>Don't have an account?<a href="./register.html">Register</a></p>
+                     <p>Don't have an account?<a href="{% url 'register' %}">Register</a></p>
                 </div>
             </form>
            
@@ -162,6 +170,6 @@
                 <div class="brow"></div>
            
         </div>
-    </div>>
+    </div>
 </body>
 </html>

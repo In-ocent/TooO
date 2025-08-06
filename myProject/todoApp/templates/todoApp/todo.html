@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>To_Do</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+       font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    }
+    body{
+        font-family: Arial, sans-serif;
+        background:  #0b5649;
+        color: aliceblue;
+    }
+    .container{
+        height: 100vh;
+       
+        position: relative;
+    }
+    .black{
+        border-radius: -50%;
+        width: 15rem;
+        height: 15em;
+        background: #000;
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        border-bottom-right-radius: 50%;
+       border-top-left-radius: 100%;
+       border-bottom-left-radius: 50%;
+       border-top-width: -50%;
+    }
+    .green{
+        width: 15rem;
+        height: 15em;
+        background: #8af8f882;
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        margin-top: 1em;
+        border-top-left-radius: 100%;
+        border-right: 50%;
+        border-top-right-radius: 40%;
+    }
+    .brow{
+        width: 15rem;
+        height: 15em;
+        background:rgb(160, 153, 153);
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+        border-top-right-radius: 400px;
+        border-top-left-radius: 900px;
+        border-bottom-left-radius:900px;
+        margin-top: 2em;
+    }
+    .nave-bar{
+        background: #000;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        font-size: large;
+        isolation: isolate;
+        padding: 2em;
+        width: 100%;
+    }
+   
+   
+@media (max-width: 768px) {
+ .black{
+    z-index: -1;
+ }
+ .brow{
+    z-index: -1;
+ }
+.green{
+    z-index: -1;
+}
+}
+.mother-container{
+   
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin: 2em;
+    
+}
+.father{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+.completed{
+    background: #8af8f882;
+    padding: 2em;
+   border-radius: 10px;
+   position: relative;
+   color: #000;
+}
+.uncompleted{
+    background:rgb(160, 153, 153);
+    padding: 2em;
+    border-radius: 10px;
+    position: relative;
+    color: #000;
+}
+
+.time-time{
+    position: absolute;
+    bottom: 0;
+}
+.btn-add{
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    bottom:20%;
+    z-index: 1;
+    left: 80%;
+    border: 2px solid rgb(2, 3, 2);
+    background: #0b5649;
+    color: white;
+    font-size: 30px;
+    font-weight: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn-add{
+   background: #000;
+}
+.delete-btn{
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: rgb(129, 51, 41);
+    border: none;
+    padding: 3px;
+    font-size: large;
+    font-weight: 800;
+    color: black;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.completed-btn{
+    color: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: green;
+    border: none;
+    padding: 3px;
+    font-size: large;
+    font-weight: 800;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.add-container{
+    position: absolute;
+    bottom:20%;
+    z-index: 1;
+    left: 50%;
+    width: 10rem;
+    border: 2px solid green;
+    background:  #0b5649;
+    padding: 1em;
+    font-size: large;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: grab;
+    transition: transform 0.2s ease;
+    -webkit-animation-delay: none;
+}
+.add-container:active{
+  transform: translate(10px, 10px); /* Simulates "move" when clicked */
+  cursor: grabbing;
+}
+
+    
+</style>
+<body>
+    <div class="container">
+        <div class="dispisher">
+            <div class="black"></div>
+                 
+            <nav class="nave-bar">
+                <p id="fullDate"></p>
+            </nav>
+
+
+            <div class="mother-container">
+                <div class="father">
+                    <div class="completed">
+                        <button class="delete-btn">delete</button>
+                        <h3>{{title}}</h3>
+                        <p>{{description}}</p>
+                        <p class="time-time">{{created_at}}</p>
+                    </div>
+                </div>
+                <div class="father">
+                    <div class="uncompleted">
+                        <button class="delete-btn">delete</button>
+                         <button class="completed-btn">comp</button>
+                        <h3>title</h3>
+                        <p>hello woor , i want to buy samsung phone tomowrow</p>
+                        <p class="time-time">2:30</p>
+                    </div>
+                    
+                </div>
+                <form method="POST">
+                        {% csrf_token %}
+                    <textarea class="add-container" name="to-do-listed" placeholder="Hi!🤗, add what to do here " required></textarea>
+
+                    <button class="btn-add" type="submit" title="add"><span>+</span></button>
+                </form>
+            </div>
+
+              
+            <div class="green"></div>
+            <div class="brow"></div>
+           
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const today = new Date();
+
+    // Get parts of the date
+    const dayName = today.toLocaleString('en-US', { weekday: 'long' }); // e.g., Monday
+    const day = today.getDate(); // e.g., 4
+    const month = today.toLocaleString('en-US', { month: 'long' }); // e.g., August
+    const year = today.getFullYear(); // e.g., 2025
+
+    // Combine them into a string
+    const fullDate = `${dayName}, ${month} ${day}, ${year}`;
+
+    // Display it in the paragraph
+    document.getElementById("fullDate").textContent = fullDate;
+
+
+
+    // drg and drop functionality
+    const dragItem = document.querySelector(".add-container");
+
+    let active = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    dragItem.addEventListener("mousedown", (e) => {
+      active = true;
+      offsetX = e.clientX - dragItem.offsetLeft;
+      offsetY = e.clientY - dragItem.offsetTop;
+      dragItem.classList.add("dragging");
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (active) {
+        dragItem.style.left = (e.clientX - offsetX) + "px";
+        dragItem.style.top = (e.clientY - offsetY) + "px";
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      active = false;
+      dragItem.classList.remove("dragging");
+    });
+</script>

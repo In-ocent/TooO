@@ -103,13 +103,15 @@
     <div class="container">
         <div class="dispisher">
             <div class="black"></div>
-            <h1 class="h1to">TOIO</h1>
-            <P>The simplest todo</P>
-            <p>app ever</p><br>
-            <p>Don't have an account? <a href="./login.html"> Login</a>, else <a href="./register.html">SinUp</a></p>
+            <h1 class="h1to">To Do List</h1>
+            <p>Welcome to your To Do List App!</p>
+            <p>Here you can manage your tasks efficiently.</p>
+            <p>Start by adding your first task!</p>
+            <a href="{% url 'login' %}">Login</a> | 
+            <a href="{% url 'register' %}">Register</a>
            
-                <div class="green"></div>
-                <div class="brow"></div>
+             <div class="green"></div>
+            <div class="brow"></div>
            
         </div>
     </div>
