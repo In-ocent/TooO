@@ -163,7 +163,7 @@
     position: absolute;
     bottom:20%;
     z-index: 1;
-    left: 50%;
+    left: 0%;
     width: 10rem;
     border: 2px solid green;
     background:  #0b5649;
@@ -173,7 +173,6 @@
     border-radius: 10px;
     cursor: grab;
     transition: transform 0.2s ease;
-    -webkit-animation-delay: none;
 }
 .add-container:active{
   transform: translate(10px, 10px); /* Simulates "move" when clicked */
@@ -196,9 +195,9 @@
                 <div class="father">
                     <div class="completed">
                         <button class="delete-btn">delete</button>
-                        <h3>{{title}}</h3>
-                        <p>{{description}}</p>
-                        <p class="time-time">{{created_at}}</p>
+                        <h3>title</h3>
+                        <p>hello woor , i want to buy samsung phone tomowrow</p>
+                        <p class="time-time">2:30</p>
                     </div>
                 </div>
                 <div class="father">
@@ -211,8 +210,8 @@
                     </div>
                     
                 </div>
-                <form method="POST">
-                        {% csrf_token %}
+                <form method="/">
+                        
                     <textarea class="add-container" name="to-do-listed" placeholder="Hi!🤗, add what to do here " required></textarea>
 
                     <button class="btn-add" type="submit" title="add"><span>+</span></button>

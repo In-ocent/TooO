@@ -63,3 +63,15 @@ def LoginView(request):
             messages.error(request, 'Invalid crendencials')
             return redirect('login')
     return render(request, 'todoApp/login.html', {})
+
+
+def delete(request, id):
+    Todo.objects.filter(id=id).delete()
+    return redirect('home')
+
+
+def update(request, id):
+    todo = Todo.objects.get(id=id)
+    todo.completed = True
+    todo.save()
+    return redirect('home')

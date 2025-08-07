@@ -7,12 +7,23 @@ from django.utils import timezone
 
 class TodoItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=500)
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=500, default='Untitled title')
     created_at = models.DateTimeField(default=timezone.now)
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return [self.title, self.description]
 
     def get_absolute_url(self):
         return f"/todo/{self.id}/"
+
+
+class Todo(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
